@@ -61,11 +61,36 @@ exports.login = function (req, res, err) {
     var email = req.body.email;
     var password = req.body.password;
     firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
-
-        res.send({
-            status: 'success'
-        })
-
+        console.log(user)
+        if (!user.user.emailVerified) {
+            res.status(400).send({
+                error: "Por favor, verifique o seu email primeiro!"
+            });
+            res.end();
+        } else {
+            return user.user.getIdToken().then(idToken => {
+                const expiresIn = 60 * 60 * 24 * 5 * 1000;
+                adminFb.auth().createSessionCookie(idToken, {
+                    expiresIn
+                }).then((sessionCookie) => {
+                    // Set cookie policy for session cookie.
+                    const options = {
+                        expires: new Date(Date.now() + 60 * 60 * 24 * 5 * 1000),
+                        httpOnly: false,
+                        secure: false
+                    };
+                    res.cookie('session', sessionCookie, options);
+                    adminFb.auth().verifySessionCookie(sessionCookie).then(decodedClaims => {
+                        res.send({
+                            status: 'success'
+                        })
+                    })
+                }, error => {
+                    console.log(error);
+                    res.redirect('/denied');
+                });
+            });
+        }
     }).then(() => {
         // A page redirect would suffice as the persistence is set to NONE.
         return firebase.auth().signOut();
@@ -74,6 +99,7 @@ exports.login = function (req, res, err) {
         res.status(500).send(error)
     })
 }
+
 
 exports.logout = function (req, res, err) {
     const sessionCookie = req.cookies.session || '';
@@ -85,9 +111,8 @@ exports.logout = function (req, res, err) {
                 var userInfo = snapshot.val();
                 if (userInfo.notiToken) {
                     adminFb.database().ref('/users/' + decodedClaims.uid).set({
-                        hubspot_id: userInfo.hubspot_id,
                         email: userInfo.email,
-                        newUser: userInfo.newUser
+                        name: userInfo.name
                     });
                 }
             })
@@ -104,148 +129,64 @@ exports.logout = function (req, res, err) {
 }
 
 exports.register = function (req, res, err) {
-    var name = req.sanitize('name').escape();
-    var email = req.sanitize('email').escape();
-    var phone = req.sanitize('phone').escape();
-    var city = req.sanitize('city').escape();
-    var country = req.sanitize('country').escape();
-    var sector = req.sanitize('sector').escape();
-    var responsible = req.sanitize('responsible').escape();
-    var nif = req.sanitize('nif').escape();
-    var password = req.sanitize('password').escape();
-    let type = req.sanitize('type').escape();
+    var name = req.body.name
+    var email = req.body.email
+    var password = req.body.password
 
-    if (type == "camara" || type == "empresa") {
-        adminFb.auth().createUser({
-            email: email,
-            password: password,
-            phoneNumber: phone,
-            displayName: name,
-            photoURL: 'https://firebasestorage.googleapis.com/v0/b/isienviron.appspot.com/o/images%2Fimageedit_2_2406096994.png?alt=media&token=3d71278f-5123-4413-b8a3-aa4a2b91615a&fbclid=IwAR1O1h53ZO5Ick1vbx6BSuJe1d4AX6FttyZ6r4IH889UYLZaxMo0qV1-OM8'
-        }).then(function (result) {
-            adminFb.auth().createCustomToken(result.uid).then(token => {
-                firebase.auth().signInWithCustomToken(token).then(result => {
-                    return result.user.sendEmailVerification();
-                }).catch(error => {
-                    console.log(error);
-                    res.status(500).send({
-                        error: error
-                    })
+    adminFb.auth().createUser({
+        email: email,
+        password: password,
+    }).then(function (result) {
+        adminFb.auth().createCustomToken(result.uid).then(token => {
+            firebase.auth().signInWithCustomToken(token).then(result => {
+                return result.user.sendEmailVerification();
+            }).catch(error => {
+                console.log(error);
+                res.status(500).send({
+                    error: error
                 })
+            })
+        }).then(() => {
+            var params = {
+                properties: [{
+                        name: 'name',
+                        value: name
+                    },
+                    {
+                        name: 'email',
+                        value: email
+                    }
+                ]
+            }
+            adminFb.database().ref('/users/' + result.uid).set({
+                email: email,
+                name: name,
+                newUser: 1
             }).then(() => {
-                var params = {
-                    properties: [{
-                            name: 'name',
-                            value: name
-                        },
-                        {
-                            name: 'email',
-                            value: email
-                        },
-                        {
-                            name: 'phone',
-                            value: phone
-                        },
-                        {
-                            name: 'city',
-                            value: city
-                        },
-                        {
-                            name: 'country',
-                            value: country
-                        },
-                        {
-                            name: 'industry',
-                            value: sector
-                        },
-                        {
-                            name: 'nif',
-                            value: nif
-                        },
-                        {
-                            name: 'responsible',
-                            value: responsible
-                        }
-                    ]
-                }
-                hubspot.companies.create(params).then((body) => {
-                    adminFb.database().ref('/users/' + result.uid).set({
-                        hubspot_id: body.companyId,
-                        email: email,
-                        newUser: 1
-                    }).then(() => {
-                        if (type == "empresa") {
-                            adminFb.auth().setCustomUserClaims(result.uid, {
-                                empresa: true
-                            }).then(() => {
-                                adminFb.auth().getUserByEmail(email).then(user => {
-                                    adminFb.auth().listUsers().then(userRecords => {
-                                        userRecords.users.forEach(userRecord => {
-                                            if (userRecord.customClaims.admin) {
-                                                var msg = 'A empresa ' + name + ' juntou-se à Environ. :)';
-                                                sendNotifications.sendNoti(msg, user, userRecord.email, "user");
-                                            }
-                                        })
-                                    })
-                                })
-                                res.status(200).send({
-                                    data: "Empresa " + name + " foi registada com o ID: " + body.companyId
-                                });
-                            }).catch(error => {
-                                console.log(error)
-                                res.status(500).send({
-                                    error: error
-                                })
-                            })
-                        } else if (type == "camara") {
-                            adminFb.auth().setCustomUserClaims(result.uid, {
-                                camara: true
-                            }).then(() => {
-                                adminFb.auth().getUserByEmail(email).then(user => {
-                                    adminFb.auth().listUsers().then(userRecords => {
-                                        userRecords.users.forEach(userRecord => {
-                                            if (userRecord.customClaims.admin) {
-                                                var msg = 'A ' + name + ' juntou-se à Environ. :)';
-                                                sendNotifications.sendNoti(msg, user, userRecord.email, "user");
-                                            }
-                                        })
-                                    })
-                                })
-                                res.status(200).send({
-                                    data: "Camara " + name + " foi registada com o ID: " + body.companyId
-                                });
-                            }).catch(error => {
-                                console.log(error)
-                                res.status(500).send({
-                                    error: error
-                                })
-                            })
-                        }
-                    }).catch(error => {
-                        console.log(error)
-                        res.status(500).send({
-                            error: error
-                        })
-                    })
-                })
+                adminFb.auth().setCustomUserClaims(result.uid, {})
+                res.status(200).send({
+                    data: "Pessoa " + name + " foi registada com o email: " + email
+                });
             }).catch(error => {
                 console.log(error)
                 res.status(500).send({
                     error: error
                 })
             })
-        }).catch(function (error) {
+        }).catch(error => {
             console.log(error)
             res.status(500).send({
                 error: error
             })
         })
-    } else {
-        res.status(400).send({
-            error: "Insira o tipo camara ou empresa"
+    }).catch(error => {
+        console.log(error)
+        res.status(500).send({
+            error: error
         })
-    }
+    })
 }
+
 
 exports.requestEmailVerification = function (req, res, err) {
     var email = req.sanitize('email').escape();
