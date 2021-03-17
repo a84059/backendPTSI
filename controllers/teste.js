@@ -3,18 +3,27 @@ exports.loginwithsession = function (req, res, err) {
     var password = req.body.password;
     firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
         if (!user.email.emailVerified) {
-            res.status(400).send({ error: "Por favor, verifique o seu email primeiro!" });
+            res.status(400).send({
+                error: "Por favor, verifique o seu email primeiro!"
+            });
             res.end();
-        }
-        else {
+        } else {
             return user.user.getIdToken().then(idToken => {
                 const expiresIn = 60 * 60 * 24 * 5 * 1000;
-                adminFb.auth().createSessionCookie(idToken, { expiresIn }).then((sessionCookie) => {
+                adminFb.auth().createSessionCookie(idToken, {
+                    expiresIn
+                }).then((sessionCookie) => {
                     // Set cookie policy for session cookie.
-                    const options = { expires: new Date(Date.now() + 60 * 60 * 24 * 5 * 1000), httpOnly: false, secure: false };
+                    const options = {
+                        expires: new Date(Date.now() + 60 * 60 * 24 * 5 * 1000),
+                        httpOnly: false,
+                        secure: false
+                    };
                     res.cookie('session', sessionCookie, options);
                     adminFb.auth().verifySessionCookie(sessionCookie).then(decodedClaims => {
-                        res.send({status: 'success'})
+                        res.send({
+                            status: 'success'
+                        })
                     })
                 }, error => {
                     console.log(error);

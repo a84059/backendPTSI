@@ -61,7 +61,6 @@ exports.login = function (req, res, err) {
     var email = req.body.email;
     var password = req.body.password;
     firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
-        console.log(user)
         if (!user.user.emailVerified) {
             res.status(400).send({
                 error: "Por favor, verifique o seu email primeiro!"
@@ -110,19 +109,14 @@ exports.logout = function (req, res, err) {
             adminFb.database().ref('/users/' + decodedClaims.uid).once('value').then(snapshot => {
                 var userInfo = snapshot.val();
                 if (userInfo.notiToken) {
-                    adminFb.database().ref('/users/' + decodedClaims.uid).set({
-                        email: userInfo.email,
-                        name: userInfo.name
-                    });
+                    adminFb.database().ref('/users/' + decodedClaims.uid).set({ name: userInfo.name, email: userInfo.email});
                 }
             })
         })
         res.clearCookie('session');
         return adminFb.auth().revokeRefreshTokens(decodedClaims.sub);
     }).then(() => {
-        res.status(200).send({
-            data: 'Logout Successfully'
-        });
+        res.status(200).send({ data: 'Logout Successfully' });
     }).catch(error => {
         res.redirect('/denied');
     })
@@ -225,15 +219,13 @@ exports.requestEmailVerification = function (req, res, err) {
 
 exports.saveNotiToken = function (req, res, err) {
     const sessionCookie = req.cookies.session || '';
-    const notiToken = req.sanitize('notiToken').escape();
+    const notiToken = req.body.notiToken;
     adminFb.auth().verifySessionCookie(sessionCookie, true /** checkRevoked */ ).then((decodedClaims) => {
         adminFb.database().ref('/users/' + decodedClaims.uid).once('value').then(snapshot => {
             var userInfo = snapshot.val();
             adminFb.database().ref('/users/' + decodedClaims.uid).set({
-                hubspot_id: userInfo.hubspot_id,
                 email: userInfo.email,
                 notiToken: notiToken,
-                newUser: userInfo.newUser
             }).then(() => {
                 res.status(200).send("Token de notificação salva");
             })
