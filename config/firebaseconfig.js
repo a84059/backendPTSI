@@ -1,6 +1,6 @@
 const adminFb = require('firebase-admin');
 const firebase = require('firebase');
-const serviceAccount = require('./projetoptsi403-firebase-adminsdk-kub20-7cd191f7a6.json');
+const serviceAccount = require('../projetoptsi403-firebase-adminsdk-kub20-7cd191f7a6.json');
 
 adminFb.initializeApp({
   credential: adminFb.credential.cert(serviceAccount),
