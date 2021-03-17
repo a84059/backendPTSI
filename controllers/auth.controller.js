@@ -4,7 +4,7 @@ const jsonMessages = require(jsonMessagesPath + "login");
 var {
     adminFb,
     firebase
-} = require('../config/firebaseConfig.js');
+} = require('../firebaseConfig.js');
 
 
 var exports = module.exports = {};
