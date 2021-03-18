@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(cors({
   exposedHeaders: ['Location'],
   credentials: true,
-  origin: ['http://localhost:8080', 'http://localhost:8000', 'https://git.heroku.com/ptsibackend.git']
+//  origin: ['http://localhost:8080', 'http://localhost:8000', 'https://git.heroku.com/ptsibackend.git']
 }));
 app.use(logger('dev'));
 app.use('/assets', express.static('assets'));
