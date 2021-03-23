@@ -42,6 +42,8 @@ app.use(function (req, res, next) {
 
 require('./routes/auth.route.js')(app);
 
+require('./routes/get.route.js')(app);
+
 app.use('/', router);
 
 
