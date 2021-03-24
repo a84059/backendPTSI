@@ -1,17 +1,18 @@
 const app = require('./server');
 const router = require('./routes/main.route');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+//const session = require('express-session');
 const expressSanitizer = require('express-sanitizer');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-const fileUpload = require('express-fileupload');
+const models = require("./models/");
+//const fileUpload = require('express-fileupload');
 
 
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 app.use(expressSanitizer());
 app.use(cookieParser());
-app.use(fileUpload({
+/*app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: '/tmp/'
 }));
@@ -38,7 +39,13 @@ app.use(function (req, res, next) {
   }
   next();
 });
+*/
+models.sequelize.sync().then(function() {
+  console.log('Nice! Database looks fine');
 
+}).catch(function(err) {
+  console.log(err, "Something went wrong with the Database Update!");
+});
 
 require('./routes/auth.route.js')(app);
 

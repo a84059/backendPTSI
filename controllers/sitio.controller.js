@@ -5,9 +5,12 @@ const jsonMessages = require(jsonMessagesPath + 'bd')
 
 var exports = module.exports = {};
 
+
+
+
 //sitio
 exports.sitio = function (req, res) {
-   const query = connect.con.query("SELECT * FROM sitio", function(error, rows, fields){
+    const query = connect.con.query("SELECT * FROM sitio", function(error, rows, fields){
         console.log(query.sql);
     if (error) {
             console.log(error);
@@ -21,7 +24,8 @@ exports.sitio = function (req, res) {
                 res.send(rows);
                 }
             }
-    });
+    })
+
 }
 
 
@@ -41,13 +45,14 @@ exports.sitioId = function (req, res) {
                  res.send(rows);
                  }
              }
-     });
+     })
+
  }
 
 
  //sitioHidrografia
  exports.sitioHidrografia = function (req, res) {
-    const query = connect.con.query("SELECT * FROM sitio_hidrografia WHERE id_sitio = ?",  [req.params.id_sitio], function(error, rows, fields){
+    const query =  connect.con.query("SELECT * FROM sitio_hidrografia WHERE id_sitio = ?",  [req.params.id_sitio], function(error, rows, fields){
          console.log(query.sql);
      if (error) {
              console.log(error);
@@ -61,5 +66,6 @@ exports.sitioId = function (req, res) {
                  res.send(rows);
                  }
              }
-     });
+     })
+
  }

@@ -1,39 +1,36 @@
 {
-  "name": "technos",
+  "name": "firebase",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "dependencies": {
-    "@google-cloud/vision": "^2.3.1",
-    "@hubspot/api-client": "^0.4.0",
-    "body-parser": "^1.16.0",
-    "canvas": "^2.6.1",
-    "cookie-parser": "^1.4.3",
-    "cors": "^2.8.4",
-    "express": "^4.17.1",
-    "express-fileupload": "^1.1.6",
-    "express-sanitizer": "^1.0.4",
-    "express-session": "^1.15.6",
-    "express-validator": "^5.3.0",
-    "firebase": "^7.10.0",
-    "firebase-admin": "^9.5.0",
-    "fs": "0.0.1-security",
-    "http": "0.0.1-security",
-    "hubspot": "^2.3.9",
-    "morgan": "^1.9.1",
-    "mustache": "^4.0.1",
-    "mysql": "^2.18.1",
-    "node-cron": "^2.0.3",
-    "nodemailer": "^4.6.5",
-    "nodemailer-smtp-transport": "^2.7.4",
-    "request": "^2.88.2",
-    "util": "^0.12.3"
-  },
-  "devDependencies": {},
+  "description": "\"# backendPTSI\"",
+  "main": "loader.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a84059/backendPTSI.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a84059/backendPTSI/issues"
+  },
+  "homepage": "https://github.com/a84059/backendPTSI#readme",
+  "dependencies": {
+    "add": "^2.0.6",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-sanitizer": "^1.0.5",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.10.0",
+    "firebase": "^8.3.1",
+    "firebase-admin": "^9.5.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  }
 }

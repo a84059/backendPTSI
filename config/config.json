@@ -1,0 +1,9 @@
+{
+    "MySQL": {
+        "username": "u157010430_AR",
+        "password": "u157010430_ARpass",
+        "database": "u157010430_arterupestre",
+        "host": "sql213.main-hosting.eu",
+        "dialect": "mysql"
+    }
+}
