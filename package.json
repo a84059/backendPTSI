@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "@google-cloud/vision": "^1.11.0",
+    "@google-cloud/vision": "^2.3.1",
     "@hubspot/api-client": "^0.4.0",
     "body-parser": "^1.16.0",
     "canvas": "^2.6.1",
@@ -16,7 +16,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.3.0",
     "firebase": "^7.10.0",
-    "firebase-admin": "^8.13.0",
+    "firebase-admin": "^9.5.0",
     "fs": "0.0.1-security",
     "html-pdf": "^2.2.0",
     "http": "0.0.1-security",
