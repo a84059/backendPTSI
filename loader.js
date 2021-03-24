@@ -42,7 +42,9 @@ app.use(function (req, res, next) {
 
 require('./routes/auth.route.js')(app);
 
-require('./routes/get.route.js')(app);
+require('./routes/sitio.route.js')(app);
+require('./routes/ue.route.js')(app);
+require('./routes/materiais.route.js')(app);
 
 app.use('/', router);
 
