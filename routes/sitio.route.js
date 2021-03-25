@@ -1,13 +1,12 @@
-
 const getController = require('../controllers/sitio.controller.js');
 
-module.exports = function(app) {
+module.exports = function (app) {
     // Routes utilizadas para fazer os pedidos GET de tudo o que esteja relacionado com o Sitio
 
 
     /*-------------------------------Sitio-------------------------------*/
     //Devolve todos os sitios existentes
-    app.get('/sitio', getController.sitio); 
+    app.get('/sitio', getController.sitio);
 
     //Devolve um sitio consoante o seu ID
     app.get('/sitio/:id_sitio', getController.sitioId);
@@ -30,7 +29,7 @@ module.exports = function(app) {
     /*-------------------------------Contexto-------------------------------*/
 
     //Devolve um o contexto de todos os sitios existentes
-     app.get('/sitioContexto', getController.sitioContexto);~
+    app.get('/sitioContexto', getController.sitioContexto);
 
     //Devolve um contexto de um sitio consoante o ID de um contexto
     app.get('/sitioContexto/:id', getController.sitioContextoID);
@@ -51,9 +50,6 @@ module.exports = function(app) {
     app.get('/sitioUEIDsitio/:id_sitio', getController.sitioUEIDsitio);
 
 
-
-
-    
     /*-------------------------------UsoSolo-------------------------------*/
 
     //Devolve todos os usos do solo existentes
