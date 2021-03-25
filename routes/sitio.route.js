@@ -38,4 +38,31 @@ module.exports = function(app) {
     //Devolve um contexto consoante o ID do sitio  
     app.get('/sitioContextoIDsitio/:id_sitio', getController.sitioContextoIDsitio);
 
+
+    /*-------------------------------UnidadeEscavatório(UE)-------------------------------*/
+
+    //Devolve todas as unidades escavatórias existentes
+    app.get('/sitioUE', getController.sitioUE);
+
+    //Devolve a unidades escavatórias consoante o ID
+    app.get('/sitioUE/:id_ue', getController.sitioUEID);
+
+    //Devolve as unidades escavatórias consoante o ID do sitio  
+    app.get('/sitioUEIDsitio/:id_sitio', getController.sitioUEIDsitio);
+
+
+
+
+    
+    /*-------------------------------UsoSolo-------------------------------*/
+
+    //Devolve todos os usos do solo existentes
+    app.get('/sitioUsoSolo', getController.sitioUsoSolo);
+
+    //Devolve os usos do solo consoante o ID
+    app.get('/sitioUsoSolo/:id', getController.sitioUsoSoloID);
+
+    //Devolve os usos do solo consoante o ID do sitio  
+    app.get('/sitioUsoSoloIDsitio/:id_sitio', getController.sitioUsoSoloIDsitio);
+
 };
