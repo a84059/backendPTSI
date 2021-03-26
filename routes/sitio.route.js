@@ -26,7 +26,7 @@ module.exports = function (app) {
     app.get('/sitioHidrografiaIDsitio/:id_sitio', getController.sitioHidrografiaIDsitio);
 
 
-    /*-------------------------------Contexto-------------------------------*/
+    /*-------------------------------Contexto_geog-------------------------------*/
 
     //Devolve um o contexto de todos os sitios existentes
     app.get('/sitioContexto', getController.sitioContexto);
@@ -60,5 +60,50 @@ module.exports = function (app) {
 
     //Devolve os usos do solo consoante o ID do sitio  
     app.get('/sitioUsoSoloIDsitio/:id_sitio', getController.sitioUsoSoloIDsitio);
+
+    /*-------------------------------Percultural-------------------------------*/
+
+    //Devolve todos Percultural
+    app.get('/sitiopercutural', getController.sitiopercutural);
+
+    //Devolve os Percultural consoante o ID do sitio  
+    app.get('/sitiopercuturalIDsitio/:id_sitio', getController.sitiopercuturalIDsitio);
+
+
+    /*-------------------------------Rela_Tipo-------------------------------*/
+
+    //Devolve todos os Rela_Tipo existentes
+    app.get('/sitiorelatipo', getController.sitiorelatipo);
+
+    //Devolve os Rela_Tipo consoante o ID
+    app.get('/sitiorelatipo/:id', getController.sitiorelatipoID);
+
+    //Devolve os Rela_Tipo consoante o ID do sitio  
+    app.get('/sitiorelatipoIDsitio/:id_sitio', getController.sitiorelatipoIDsitio);
+
+    
+    /*-------------------------------Contexto_Geol-------------------------------*/
+
+    //Devolve todos os Contexto_Geol existentes
+    app.get('/sitiocontextogeol', getController.sitiocontextogeol);
+
+    //Devolve os Contexto_Geol consoante o ID
+    app.get('/sitiocontextogeol/:id', getController.sitiocontextogeolID);
+
+    //Devolve os Contexto_Geol consoante o ID do sitio  
+    app.get('/sitiocontextogeolIDsitio/:id_sitio', getController.sitiocontextogeolIDsitio);
+
+
+    /*-------------------------------Rela_Int-------------------------------*/
+
+    //Devolve todos os Rela_Int existentes
+    app.get('/sitiorelaint', getController.sitiorelaint);
+
+    //Devolve os Rela_Int consoante o ID
+    app.get('/sitiorelaint/:id', getController.sitiorelaintID);
+
+    //Devolve os Rela_Int consoante o ID do sitio  
+    app.get('/sitiorelaintIDsitio/:id_sitio', getController.sitiorelaintIDsitio);
+
 
 };

@@ -125,7 +125,7 @@ exports.sitioHidrografiaIDsitio = function (req, res) {
 }
 
 
-/*-------------------------------Contexto-------------------------------*/
+/*-------------------------------Contexto_geog-------------------------------*/
 
 exports.sitioContexto = function (req, res) {
     const query = connect.con.query("SELECT * FROM sitio_contexto_geog", function (error, rows, fields) {
@@ -277,6 +277,218 @@ exports.sitioUsoSoloID = function (req, res) {
 //sitioUsoSoloIDsitio
 exports.sitioUsoSoloIDsitio = function (req, res) {
     const query = connect.con.query("SELECT * FROM sitio_uso_solo WHERE id_sitio = ?", [req.params.id_sitio], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+
+}
+
+
+/*-------------------------------Rela_Sitio_Percultural-------------------------------*/
+
+
+
+//sitiopercutural
+exports.sitiopercutural = function (req, res) {
+    const query = connect.con.query("SELECT * FROM rela_sitio_percultural", function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
+
+
+
+//sitiopercuturalIDsitio
+exports.sitiopercuturalIDsitio = function (req, res) {
+    const query = connect.con.query("SELECT * FROM rela_sitio_percultural WHERE id_sitio = ?", [req.params.id_sitio], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+
+}
+
+/*-------------------------------Rela_Tipo-------------------------------*/
+
+
+
+//sitiorelatipo
+exports.sitiorelatipo = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_rela_tipo", function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
+
+//sitiorelatipoID
+exports.sitiorelatipoID = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_rela_tipo WHERE id = ?", [req.params.id], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+
+}
+
+//sitiorelatipoIDsitio
+exports.sitiorelatipoIDsitio = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_rela_tipo WHERE id_sitio = ?", [req.params.id_sitio], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+
+}
+
+
+/*-------------------------------Contexto_Geol-------------------------------*/
+
+
+
+//sitiocontextogeol
+exports.sitiocontextogeol = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_contexto_geol", function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
+
+//sitiocontextogeolID
+exports.sitiocontextogeolID = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_contexto_geol WHERE id = ?", [req.params.id], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+
+}
+
+//sitiocontextogeolIDsitio
+exports.sitiocontextogeolIDsitio = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_contexto_geol WHERE id_sitio = ?", [req.params.id_sitio], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+
+}
+
+/*-------------------------------Rela_Int-------------------------------*/
+
+//sitiorelaint
+exports.sitiorelaint = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_rela_int", function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
+
+//sitiorelaintID
+exports.sitiorelaintID = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_rela_int WHERE id = ?", [req.params.id], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+
+}
+
+//sitiorelaintIDsitio
+exports.sitiorelaintIDsitio = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sitio_rela_int WHERE id_sitio = ?", [req.params.id_sitio], function (error, rows, fields) {
         console.log(query.sql);
         if (error) {
             console.log(error);
