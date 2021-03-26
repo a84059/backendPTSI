@@ -81,7 +81,7 @@ module.exports = function (app) {
     //Devolve os Rela_Tipo consoante o ID do sitio  
     app.get('/sitiorelatipoIDsitio/:id_sitio', getController.sitiorelatipoIDsitio);
 
-    
+
     /*-------------------------------Contexto_Geol-------------------------------*/
 
     //Devolve todos os Contexto_Geol existentes

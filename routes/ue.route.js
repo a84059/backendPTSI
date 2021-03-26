@@ -1,10 +1,9 @@
-
 const getController = require('../controllers/ue.controller.js');
 
-module.exports = function(app) {
+module.exports = function (app) {
     //ue Routes
-    app.get('/ue', getController.ue); 
-    app.get('/ue/:id_ue', getController.ueId); 
+    app.get('/ue', getController.ue);
+    app.get('/ue/:id_ue', getController.ueId);
     app.get('/ue/sitio/:id_sitio', getController.ueSitioId);
 
     //sondagem Routes
