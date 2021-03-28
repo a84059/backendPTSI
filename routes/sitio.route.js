@@ -17,7 +17,7 @@ module.exports = function (app) {
 
     /*-------------------------------Hidrografia-------------------------------*/
     //Devolve um sitiohidrografia consoante o ID do sitio  
-    app.get('/sitioHidrografia/', getController.sitioHidrografia);
+    app.get('/sitioHidrografia', getController.sitioHidrografia);
 
     //Devolve um sitiohidrografia consoante o ID 
     app.get('/sitioHidrografia/:id', getController.sitioHidrografiaID);
