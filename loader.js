@@ -50,6 +50,7 @@ models.sequelize.sync().then(function() {
 require('./routes/auth.route.js')(app);
 require('./routes/sitio.route.js')(app);
 require('./routes/imagens.route.js')(app);
+require('./routes/modelos.route.js')(app);
 require('./routes/ue.route.js')(app);
 require('./routes/materiais.route.js')(app);
 
