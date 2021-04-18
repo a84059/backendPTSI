@@ -503,3 +503,22 @@ exports.sitiorelaintIDsitio = function (req, res) {
     })
 
 }
+
+/*-------------------------------Sondagem-------------------------------*/
+
+//sitioSondagens
+exports.sitioSondagens = function (req, res) {
+    const query = connect.con.query("SELECT * FROM sondagem WHERE id_sitio = ?", [req.params.id_sitio], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}

@@ -106,4 +106,8 @@ module.exports = function (app) {
     app.get('/sitiorelaintIDsitio/:id_sitio', getController.sitiorelaintIDsitio);
 
 
+/*-------------------------------Sondagem-------------------------------*/
+
+    app.get('/sitiosondagens/:id_sitio', getController.sitioSondagens)
+
 };

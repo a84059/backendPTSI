@@ -109,14 +109,19 @@ exports.logout = function (req, res, err) {
             adminFb.database().ref('/users/' + decodedClaims.uid).once('value').then(snapshot => {
                 var userInfo = snapshot.val();
                 if (userInfo.notiToken) {
-                    adminFb.database().ref('/users/' + decodedClaims.uid).set({ name: userInfo.name, email: userInfo.email});
+                    adminFb.database().ref('/users/' + decodedClaims.uid).set({
+                        name: userInfo.name,
+                        email: userInfo.email
+                    });
                 }
             })
         })
         res.clearCookie('session');
         return adminFb.auth().revokeRefreshTokens(decodedClaims.sub);
     }).then(() => {
-        res.status(200).send({ data: 'Logout Successfully' });
+        res.status(200).send({
+            data: 'Logout Successfully'
+        });
     }).catch(error => {
         res.redirect('/denied');
     })
@@ -124,6 +129,13 @@ exports.logout = function (req, res, err) {
 
 exports.register = function (req, res, err) {
     var name = req.body.name
+    var username = req.body.username
+    var morada = req.body.morada
+    var codigopostal = req.body.codigopostal
+    var localidade = req.body.localidade
+    var pais = req.body.pais
+    var telefone = req.body.telefone
+    var nif = req.body.nif
     var email = req.body.email
     var password = req.body.password
 
@@ -147,6 +159,34 @@ exports.register = function (req, res, err) {
                         value: name
                     },
                     {
+                        name: 'username',
+                        value: username
+                    },
+                    {
+                        name: 'morada',
+                        value: morada
+                    },
+                    {
+                        name: 'codigopostal',
+                        value: codigopostal
+                    },
+                    {
+                        name: 'localidade',
+                        value: localidade
+                    },
+                    {
+                        name: 'pais',
+                        value: pais
+                    },
+                    {
+                        name: 'telefone',
+                        value: telefone
+                    },
+                    {
+                        name: 'nif',
+                        value: nif
+                    },
+                    {
                         name: 'email',
                         value: email
                     }
@@ -155,11 +195,18 @@ exports.register = function (req, res, err) {
             adminFb.database().ref('/users/' + result.uid).set({
                 email: email,
                 name: name,
+                username: username,
+                morada: morada,
+                codigopostal: codigopostal,
+                localidade: localidade,
+                pais: pais,
+                telefone: telefone,
+                nif: nif,
                 newUser: 1
             }).then(() => {
                 adminFb.auth().setCustomUserClaims(result.uid, {})
                 res.status(200).send({
-                    data: "Pessoa " + name + " foi registada com o email: " + email
+                    data: "Pessoa " + name + " foi registada com o email: " + email + "e os seguintes dados:" + "/n Username: " + username + "/n Morada: " + morada + "/n CodigoPostal: " + codigopostal + "/n Localidade: " + localidade + "/n Pais: " + pais + "/n Telefone: " + telefone + "/n Nif: " + nif
                 });
             }).catch(error => {
                 console.log(error)
