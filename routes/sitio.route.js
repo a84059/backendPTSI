@@ -110,4 +110,9 @@ module.exports = function (app) {
 
     app.get('/sitiosondagens/:id_sitio', getController.sitioSondagens)
 
+
+    /*Pesquisa simples*/
+    app.get('/sitioPorNome/:nome', getController.sitioPorNome);
+    app.get('/sitioPorFreguesia/:freguesia', getController.sitioPorFreguesia);
+
 };
