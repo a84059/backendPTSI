@@ -543,7 +543,7 @@ exports.sitioPorNome = function (req, res) {
 
 //sitioPorFreguesia
 exports.sitioPorFreguesia = function (req, res) {
-    const query = connect.con.query("SELECT * FROM sitio WHERE freguesia1 = ? OR freguesia2 = ?", [req.params.freguesia], function (error, rows, fields) {
+    const query = connect.con.query("SELECT * FROM sitio WHERE freguesia1 = ? OR freguesia2 = ?", [req.params.freguesia, req.params.freguesia], function (error, rows, fields) {
         console.log(query.sql);
         if (error) {
             console.log(error);
