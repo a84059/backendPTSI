@@ -557,3 +557,36 @@ exports.sitioPorFreguesia = function (req, res) {
         }
     })
 }
+
+//rela bibliografia
+exports.bibliografiaIDSitio = function (req, res) {
+    const query = connect.con.query("SELECT * FROM rela_bibli WHERE id_sitio = ?", [req.params.id_sitio], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
+//bibliografia
+exports.bibliografiaID = function (req, res) {
+    const query = connect.con.query("SELECT * FROM bibliografia WHERE id_bibliografia = ?", [req.params.id_bibliografia], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}

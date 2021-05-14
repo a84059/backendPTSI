@@ -115,4 +115,9 @@ module.exports = function (app) {
     app.get('/sitioPorNome/:nome', getController.sitioPorNome);
     app.get('/sitioPorFreguesia/:freguesia', getController.sitioPorFreguesia);
 
+
+    //Rela Bibliografia e Bibliografia
+    app.get('/bibliografiaIDSitio/:id_sitio', getController.bibliografiaIDSitio);
+    app.get('/bibliografia/:id_bibliografia', getController.bibliografiaID);
+
 };
