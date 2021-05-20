@@ -280,3 +280,16 @@ exports.saveNotiToken = function (req, res, err) {
     })
 
 }
+
+exports.recoverPassword = function (req, res, err) {
+    var email = req.body.email;
+    firebase.auth().sendPasswordResetEmail(email).then(() => {
+        // Email sent.
+        res.status(200).send({ msg: "Email para recuperar a password enviado com sucesso!" });
+        res.end();
+    }).catch(error => {
+        console.log(error);
+        res.status(500).send({ error: error });
+        res.end();
+    });
+}
