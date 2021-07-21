@@ -590,3 +590,21 @@ exports.bibliografiaID = function (req, res) {
         }
     })
 }
+
+//sitio/Freguesia
+exports.freguesia = function (req, res) {
+    const query = connect.con.query("SELECT DISTINCT freguesia1 FROM sitio", function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+
+}

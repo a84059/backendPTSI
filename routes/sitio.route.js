@@ -120,4 +120,7 @@ module.exports = function (app) {
     app.get('/bibliografiaIDSitio/:id_sitio', getController.bibliografiaIDSitio);
     app.get('/bibliografia/:id_bibliografia', getController.bibliografiaID);
 
+/*-------------------------------Sondagem-------------------------------*/
+    app.get('/freguesia', getController.freguesia);
+
 };
