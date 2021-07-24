@@ -647,7 +647,7 @@ exports.concelho = function (req, res) {
 
 //concelhobydistrito
 exports.concelhobydistrito = function (req, res) {
-    const query = connect.con.query('SELECT DISTINCT concelho FROM sitio WHERE distrito = ? ;', [req.params.distrito], function (error, rows, fields) {
+    const query = connect.con.query('SELECT DISTINCT concelho FROM sitio WHERE distrito = ? ;', [req.body.distrito], function (error, rows, fields) {
         console.log(query.sql);
         if (error) {
             console.log(error);

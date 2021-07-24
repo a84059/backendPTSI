@@ -126,6 +126,6 @@ module.exports = function (app) {
     app.get('/concelho', getController.concelho);
 
     app.post('/freguesia/concelho', getController.freguesiabyconcelho);
-    app.get('/concelho/:distrito', getController.concelhobydistrito);
+    app.post('/concelho/distrito', getController.concelhobydistrito);
 
 };
