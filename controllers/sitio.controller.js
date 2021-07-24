@@ -644,3 +644,37 @@ exports.concelho = function (req, res) {
     })
 
 }
+
+//concelhobydistrito
+exports.concelhobydistrito = function (req, res) {
+    const query = connect.con.query("SELECT DISTINCT concelho FROM sitio WHERE distrito = ?", [req.params.distrito], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
+
+//concelhobydistrito
+exports.freguesiabyconcelho = function (req, res) {
+    const query = connect.con.query("SELECT DISTINCT freguesia1 FROM sitio WHERE concelho = ?", [req.params.concelho], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
