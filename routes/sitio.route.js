@@ -122,5 +122,7 @@ module.exports = function (app) {
 
 /*-------------------------------Sondagem-------------------------------*/
     app.get('/freguesia', getController.freguesia);
+    app.get('/distrito', getController.freguesia);
+    app.get('/concelho', getController.freguesia);
 
 };
