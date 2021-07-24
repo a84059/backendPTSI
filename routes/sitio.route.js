@@ -125,7 +125,7 @@ module.exports = function (app) {
     app.get('/distrito', getController.distrito);
     app.get('/concelho', getController.concelho);
 
-    app.get(('/freguesia/:concelho').replace("%20"," ").replace("%C3%B4","ô"), getController.freguesiabyconcelho);
-    app.get(encodeURI('/concelho/:distrito'), getController.concelhobydistrito);
+    app.post('/freguesia/concelho', getController.freguesiabyconcelho);
+    app.get('/concelho/:distrito', getController.concelhobydistrito);
 
 };
