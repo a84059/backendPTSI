@@ -128,4 +128,8 @@ module.exports = function (app) {
     app.post('/freguesia/concelho', getController.freguesiabyconcelho);
     app.post('/concelho/distrito', getController.concelhobydistrito);
 
+    app.post('/sitio/freguesia', getController.sitiocomfreguesia);
+    app.post('/sitio/concelho', getController.sitiocomconcelho);
+    app.post('/sitio/distrito', getController.sitiocomdistrito);
+
 };

@@ -678,3 +678,54 @@ exports.freguesiabyconcelho = function (req, res) {
         }
     })
 }
+
+//sitiocomdistrito
+exports.sitiocomdistrito = function (req, res) {
+    const query = connect.con.query('SELECT * FROM sitio WHERE distrito = ?;', [req.body.distrito], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
+
+//sitiocomconcelho
+exports.sitiocomconcelho = function (req, res) {
+    const query = connect.con.query('SELECT * FROM sitio WHERE concelho = ?;', [req.body.concelho], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
+
+//sitiocomfreguesia
+exports.sitiocomfreguesia = function (req, res) {
+    const query = connect.con.query('SELECT * FROM sitio WHERE freguesia = ?;', [req.body.freguesia], function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}
