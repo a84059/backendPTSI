@@ -1126,7 +1126,7 @@ exports.rocha_motivoPorMotivoId = function (req, res) {
 }
 
 exports.rocha_motivoPorSitio = function (req, res) {
-    const query = connect.con.query("SELECT * FROM rocha_motivo WHERE id_sitio = ?", [req.parmas.id_sitio], function (error, rows, fields) {
+    const query = connect.con.query("SELECT * FROM rocha_motivo WHERE id_sitio = ?", [req.params.id_sitio], function (error, rows, fields) {
         console.log(query.sql);
         if (error) {
             console.log(error);

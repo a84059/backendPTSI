@@ -77,7 +77,7 @@ module.exports = function(app) {
     app.get('/materiais/rocha_motivo/:id_motivo', getController.rocha_motivoPorMotivoId); 
     app.get('/materiais/rocha_motivo/material/:id_material', getController.rocha_motivoPorMateriaisId);
     app.get('/materiais/rocha_motivo/painel/:id_painel', getController.rocha_motivoPorPainelId);
-    app.get('/materiais/rocha_motivo/sitio/all/:id_sitio', getController.rocha_motivoPorSitio);
+    app.get('/materiais/rocha_motivo/sitio/:id_sitio', getController.rocha_motivoPorSitio);
     
     //rocha_painel
     app.get('/materiais/rocha_painel/all', getController.rocha_painel); 
