@@ -132,6 +132,6 @@ module.exports = function (app) {
     app.post('/sitio/concelho', getController.sitiocomconcelho);
     app.post('/sitio/distrito', getController.sitiocomdistrito);
 
-    app.get('/novidades', getController.novidades);
+    app.get('/novidades/all', getController.novidades);
 
 };
