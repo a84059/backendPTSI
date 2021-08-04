@@ -729,3 +729,20 @@ exports.sitiocomfreguesia = function (req, res) {
         }
     })
 }
+
+//sitiocomfreguesia
+exports.novidades = function (req, res) {
+    const query = connect.con.query('SELECT * FROM web_novidades', function (error, rows, fields) {
+        console.log(query.sql);
+        if (error) {
+            console.log(error);
+            res.status(jsonMessages.db.dbError.status).send(jsonMessages.db.dbError);
+        } else {
+            if (rows.length == 0) {
+                res.status(jsonMessages.db.noRecords.status).send(jsonMessages.db.noRecords);
+            } else {
+                res.send(rows);
+            }
+        }
+    })
+}

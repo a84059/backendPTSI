@@ -132,4 +132,6 @@ module.exports = function (app) {
     app.post('/sitio/concelho', getController.sitiocomconcelho);
     app.post('/sitio/distrito', getController.sitiocomdistrito);
 
+    app.post('/novidades', getController.novidades);
+
 };
