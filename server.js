@@ -22,5 +22,10 @@ app.listen(port, function (err) {
   }
 });
 
+var http = require("http");
+setInterval(function() {
+    http.get("http://ptsibackend.herokuapp.com");
+}, 300000); // every 5 minutes (300000)
+
 module.exports = app;
 require('./loader.js');
